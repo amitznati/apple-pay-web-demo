@@ -18,18 +18,24 @@
   </style>
   <script>
     window.addEventListener('load', function() {
-      var btnTemplateEl = document.getElementById('btn-template');
-      // Check if Apple Pay is available (Browser support & Client support: Digital Wallet enable)
+      var apAvailableEl = document.getElementById('ap-available');
+      var apNotAvailableEl = document.getElementById('ap-not-available');
+      // Check if Apple Pay is available (Browser support & Device support: Digital Wallet enable)
       if (window.ApplePaySession && window.ApplePaySession.canMakePayments()) {
-        btnTemplateEl.innerHTML = `<apple-pay-button type="plain" ></apple-pay-button>`;
+        apNotAvailableEl.style.display = 'none';
       } else {
-        btnTemplateEl.innerHTML = 'Apple Pay is not available on this device or browser.';
+        apAvailableEl.style.display = 'none';
       }
     });
 
   </script>
 </head>
 <body>
-  <div id="btn-template" ></div>
+  <div id="ap-available">
+    <apple-pay-button type="plain" id="ap-btn"></apple-pay-button>
+  </div>
+  <div id="ap-not-available">
+    <p>Apple Pay is not available on this device or browser.</p>
+  </div>
 </body>
 </html>
